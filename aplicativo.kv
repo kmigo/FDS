@@ -1,22 +1,42 @@
 #coding:utf-8
 #:import Toolbar kivymd.toolbar.Toolbar
 #: import ThemeManager kivymd.theming.ThemeManager
+#:import MDNavigationDrawer kivymd.navigationdrawer.MDNavigationDrawer
+#:import NavigationDrawerSubheader kivymd.navigationdrawer.NavigationDrawerSubheader
+
 
 <GerenciadorTela>:
 	Tela:
+		id:tela
 
+
+<ContentNavigationDrawer@MDNavigationDrawer>:
+    drawer_logo: 'demos/kitchen_sink/assets/drawer_logo.png'
+
+    NavigationDrawerSubheader:
+        text: "Menu:"
 
 <Tela>:
+	Barra:
+
+	
+
+<Barra@NavigationLayout>:
+	id: nav_layout
+	
+	ContentNavigationDrawer:
+	    id: nav_drawer
+	
 	BoxLayout:
-		orientation:'vertical'
-		Toolbar:
-			id:toolbar
-			title: "FDS"
-			md_bg_color : app.theme_cls.primary_color
-			background_palette : 'Primary'
-			elevation: 10
-			left_action_items:[['menu', lambda x:None]]
-			background_hue: '500'
-		
-		BoxLayout:
+	    orientation: 'vertical'
+	
+	    Toolbar:
+	        id: toolbar
+	        title: 'KivyMD Kitchen Sink'
+	        md_bg_color: app.theme_cls.primary_color
+	        background_palette: 'Primary'
+	        background_hue: '500'
+	        elevation: 10
+	        left_action_items:[['dots-vertical', lambda x: app.root.toggle_nav_drawer()]]
+
 		
