@@ -1,0 +1,49 @@
+[INFO   ] Logger: Record log in /storage/emulated/0/github/FDS/.kivy/logs/kivy_18-12-24_80.txt
+[INFO   ] Kivy: v1.10.1.dev0, git-Unknown, 20171218
+[INFO   ] Python: v2.7.14 (default, Dec 18 2017, 09:30:59) 
+[GCC 7.2.0]
+[INFO   ] Factory: 194 symbols loaded
+[INFO   ] Image: Providers: img_tex, img_dds, img_sdl2, img_gif (img_pil, img_ffpyplayer ignored)
+[INFO   ] Text: Provider: sdl2
+[INFO   ] KivyMD: KivyMD version: 0.8.6
+[INFO   ] OSC: using <thread> for socket
+[INFO   ] Window: Provider: sdl2
+[INFO   ] GL: Using the "OpenGL ES 2" graphics system
+[INFO   ] GL: Backend used <gl>
+[INFO   ] GL: OpenGL version <OpenGL ES 3.2 V@269.0 (GIT@908a5ce, I77d3059488) (Date:06/07/18)>
+[INFO   ] GL: OpenGL vendor <Qualcomm>
+[INFO   ] GL: OpenGL renderer <Adreno (TM) 506>
+[INFO   ] GL: OpenGL parsed version: 3, 2
+[INFO   ] GL: Texture max size <16384>
+[INFO   ] GL: Texture max units <16>
+[INFO   ] Window: auto add sdl2 input provider
+[INFO   ] Window: virtual keyboard not allowed, single mode, not docked
+[INFO   ] GL: NPOT texture support is available
+[WARNING] stderr: Traceback (most recent call last):
+[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 211, in <module>
+[WARNING] stderr:     
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/app.py", line 803, in run
+[WARNING] stderr:     root = self.build()
+[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 178, in build
+[WARNING] stderr:     return self.main_widget
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/builder.py", line 350, in load_string
+[WARNING] stderr:     parser = Parser(content=string, filename=fn)
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 393, in __init__
+[WARNING] stderr:     self.parse(content)
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 502, in parse
+[WARNING] stderr:     objects, remaining_lines = self.parse_level(0, lines)
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 606, in parse_level
+[WARNING] stderr:     level + 1, lines[i:], spaces)
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 606, in parse_level
+[WARNING] stderr:     level + 1, lines[i:], spaces)
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 616, in parse_level
+[WARNING] stderr:     'Invalid property name')
+[WARNING] stderr: kivy.lang.parser.ParserException: Parser: File "<inline>", line 137:
+[WARNING] stderr: ...
+[WARNING] stderr:     135:		MDTextField:
+[WARNING] stderr:     136:			hint_text:'Senha'
+[WARNING] stderr: >>  137:			password=True
+[WARNING] stderr:     138:			id:txtsenha
+[WARNING] stderr:     139:	Screen:
+[WARNING] stderr: ...
+[WARNING] stderr: Invalid property name

@@ -4,8 +4,8 @@
 [GCC 7.2.0]
 [INFO   ] Factory: 194 symbols loaded
 [INFO   ] Image: Providers: img_tex, img_dds, img_sdl2, img_gif (img_pil, img_ffpyplayer ignored)
-[INFO   ] KivyMD: KivyMD version: 0.8.6
 [INFO   ] Text: Provider: sdl2
+[INFO   ] KivyMD: KivyMD version: 0.8.6
 [INFO   ] OSC: using <thread> for socket
 [INFO   ] Window: Provider: sdl2
 [INFO   ] GL: Using the "OpenGL ES 2" graphics system
@@ -19,4 +19,7 @@
 [INFO   ] Window: auto add sdl2 input provider
 [INFO   ] Window: virtual keyboard not allowed, single mode, not docked
 [INFO   ] GL: NPOT texture support is available
-[ERROR  ] Image: Error reading file demos/kitchen_sink/assets/drawer_logo.png
+[WARNING] Base: Unknown <android> provider
+[INFO   ] Base: Start application main loop
+[WARNING] Base: Failed to import "android" module. Could not remove android presplash.
+[INFO   ] Base: Leaving application in progress...
