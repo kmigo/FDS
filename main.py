@@ -1,5 +1,5 @@
 #coding=utf-8
-import sys
+import sys,json
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -312,8 +312,8 @@ class TelaInicio(Screen):
 	
 	def carregar(self,*args):
 		try:
-			with open('lista.txt','r') as file:
-				self.dados=file.readlines()
+			with open('lista.json','r') as file:
+				self.dados=json.load(file)
 		except:
 			pass
 	
@@ -323,17 +323,32 @@ class TelaInicio(Screen):
 		self.salvar()
 	def salvar(self,*args):
 		try:
-			with open('lista.txt','w') as file:
-				file.write(self.dados)
+			with open('lista.json','w') as file:
+				json.dump(self.dados,file)
 		except:
 			pass
 
 class TelaAdicionar(Screen):
+	dados=[]
+	def on_pre_enter(self):
+		self.carregar()
+	def carregar(self,*args):
+		try:
+			with open('lista.json','r') as file:
+				self.dados=json.load(file)
+		except:
+			pass
+	
 	def salvar(self,*args):
 		futebol=self.ids.futnome.text
+		self.dados.append(futebol)
+		self.salvardados()
+		
+	def salvardados(self,*args):
+	
 		try:
-			with open('lista.txt','w') as file:
-				file.write('%s'%futebol)
+			with open('lista.json','w') as file:
+				json.dump(self.dados,file)
 		except:
 			pass
 		
