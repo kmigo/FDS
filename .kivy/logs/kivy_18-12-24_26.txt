@@ -22,4 +22,3 @@
 [WARNING] Base: Unknown <android> provider
 [INFO   ] Base: Start application main loop
 [WARNING] Base: Failed to import "android" module. Could not remove android presplash.
-[INFO   ] Base: Leaving application in progress...

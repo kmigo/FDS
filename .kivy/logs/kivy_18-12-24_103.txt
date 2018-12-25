@@ -1,4 +1,4 @@
-[INFO   ] Logger: Record log in /storage/emulated/0/github/FDS/.kivy/logs/kivy_18-12-24_5.txt
+[INFO   ] Logger: Record log in /storage/emulated/0/github/FDS/.kivy/logs/kivy_18-12-24_103.txt
 [INFO   ] Kivy: v1.10.1.dev0, git-Unknown, 20171218
 [INFO   ] Python: v2.7.14 (default, Dec 18 2017, 09:30:59) 
 [GCC 7.2.0]
@@ -24,8 +24,8 @@
 [WARNING] Base: Failed to import "android" module. Could not remove android presplash.
 [INFO   ] Base: Leaving application in progress...
 [WARNING] stderr: Traceback (most recent call last):
-[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 251, in <module>
-[WARNING] stderr:     Example().run()
+[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 224, in <module>
+[WARNING] stderr:     
 [WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/app.py", line 829, in run
 [WARNING] stderr:     runTouchApp()
 [WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/base.py", line 502, in runTouchApp
@@ -55,22 +55,7 @@
 [WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/builder.py", line 64, in custom_callback
 [WARNING] stderr:     exec(__kvlang__.co_value, idmap)
 [WARNING] stderr:   File "<string>", line 141, in <module>
-[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 190, in login
-[WARNING] stderr:     App.get_running_app().main_widget.ids.conta.add_widget(TelaAdm())
-[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/uix/boxlayout.py", line 131, in __init__
-[WARNING] stderr:     super(BoxLayout, self).__init__(**kwargs)
-[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/uix/layout.py", line 76, in __init__
-[WARNING] stderr:     super(Layout, self).__init__(**kwargs)
-[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/uix/widget.py", line 345, in __init__
-[WARNING] stderr:     Builder.apply(self, ignored_consts=self._kwargs_applied_init)
-[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/builder.py", line 451, in apply
-[WARNING] stderr:     self._apply_rule(widget, rule, rule, ignored_consts=ignored_consts)
-[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/builder.py", line 567, in _apply_rule
-[WARNING] stderr:     self._apply_rule(child, crule, rootrule)
-[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/builder.py", line 567, in _apply_rule
-[WARNING] stderr:     self._apply_rule(child, crule, rootrule)
-[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/builder.py", line 526, in _apply_rule
-[WARNING] stderr:     cls = Factory_get(cname)
-[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/factory.py", line 131, in __getattr__
-[WARNING] stderr:     raise FactoryException('Unknown class <%s>' % name)
-[WARNING] stderr: kivy.factory.FactoryException: Unknown class <MD>
+[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 169, in login
+[WARNING] stderr:     main_widget = None
+[WARNING] stderr:   File "kivy/weakproxy.pyx", line 30, in kivy.weakproxy.WeakProxy.__getattr__ (kivy/weakproxy.c:1201)
+[WARNING] stderr: AttributeError: 'Screen' object has no attribute 'clear_widget'

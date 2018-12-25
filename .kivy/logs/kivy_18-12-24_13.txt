@@ -19,7 +19,27 @@
 [INFO   ] Window: auto add sdl2 input provider
 [INFO   ] Window: virtual keyboard not allowed, single mode, not docked
 [INFO   ] GL: NPOT texture support is available
-[WARNING] Base: Unknown <android> provider
-[INFO   ] Base: Start application main loop
-[WARNING] Base: Failed to import "android" module. Could not remove android presplash.
-[INFO   ] Base: Leaving application in progress...
+[WARNING] stderr: Traceback (most recent call last):
+[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 257, in <module>
+[WARNING] stderr:     
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/app.py", line 803, in run
+[WARNING] stderr:     root = self.build()
+[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 224, in build
+[WARNING] stderr:     def build(self):
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/builder.py", line 350, in load_string
+[WARNING] stderr:     parser = Parser(content=string, filename=fn)
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 393, in __init__
+[WARNING] stderr:     self.parse(content)
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 499, in parse
+[WARNING] stderr:     self.execute_directives()
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 458, in execute_directives
+[WARNING] stderr:     raise ParserException(self, ln, 'Invalid import syntax')
+[WARNING] stderr: kivy.lang.parser.ParserException: Parser: File "<inline>", line 13:
+[WARNING] stderr: ...
+[WARNING] stderr:      11:#:import TwoLineListItem kivymd.list.TwoLineListItem
+[WARNING] stderr:      12:#:import ThreeLineListItem kivymd.list.ThreeLineListItem
+[WARNING] stderr: >>   13:#:import OneLineAvatarListItem
+[WARNING] stderr:      14:
+[WARNING] stderr:      15:
+[WARNING] stderr: ...
+[WARNING] stderr: Invalid import syntax

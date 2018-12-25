@@ -19,7 +19,33 @@
 [INFO   ] Window: auto add sdl2 input provider
 [INFO   ] Window: virtual keyboard not allowed, single mode, not docked
 [INFO   ] GL: NPOT texture support is available
-[WARNING] Base: Unknown <android> provider
-[INFO   ] Base: Start application main loop
-[WARNING] Base: Failed to import "android" module. Could not remove android presplash.
-[INFO   ] Base: Leaving application in progress...
+[WARNING] stderr: Traceback (most recent call last):
+[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 274, in <module>
+[WARNING] stderr:     
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/app.py", line 803, in run
+[WARNING] stderr:     root = self.build()
+[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 241, in build
+[WARNING] stderr:     def login(self,*args): 
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/builder.py", line 350, in load_string
+[WARNING] stderr:     parser = Parser(content=string, filename=fn)
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 393, in __init__
+[WARNING] stderr:     self.parse(content)
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 502, in parse
+[WARNING] stderr:     objects, remaining_lines = self.parse_level(0, lines)
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 606, in parse_level
+[WARNING] stderr:     level + 1, lines[i:], spaces)
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 606, in parse_level
+[WARNING] stderr:     level + 1, lines[i:], spaces)
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 606, in parse_level
+[WARNING] stderr:     level + 1, lines[i:], spaces)
+[WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/parser.py", line 616, in parse_level
+[WARNING] stderr:     'Invalid property name')
+[WARNING] stderr: kivy.lang.parser.ParserException: Parser: File "<inline>", line 164:
+[WARNING] stderr: ...
+[WARNING] stderr:     162:				text:'Nivel de Permisão: Global'
+[WARNING] stderr:     163:				secondary_text:'Dentre suas permições esta
+[WARNING] stderr: >>  164:				o dominio geral ds criação e ediçao de certos
+[WARNING] stderr:     165:				widgets'
+[WARNING] stderr:     166:				
+[WARNING] stderr: ...
+[WARNING] stderr: Invalid property name
