@@ -1,4 +1,4 @@
-[INFO   ] Logger: Record log in /storage/emulated/0/github/FDS/.kivy/logs/kivy_18-12-24_64.txt
+[INFO   ] Logger: Record log in /storage/emulated/0/github/FDS/.kivy/logs/kivy_18-12-25_42.txt
 [INFO   ] Kivy: v1.10.1.dev0, git-Unknown, 20171218
 [INFO   ] Python: v2.7.14 (default, Dec 18 2017, 09:30:59) 
 [GCC 7.2.0]
@@ -24,8 +24,8 @@
 [WARNING] Base: Failed to import "android" module. Could not remove android presplash.
 [INFO   ] Base: Leaving application in progress...
 [WARNING] stderr: Traceback (most recent call last):
-[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 205, in <module>
-[WARNING] stderr:     
+[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 419, in <module>
+[WARNING] stderr:     Example().run()
 [WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/app.py", line 829, in run
 [WARNING] stderr:     runTouchApp()
 [WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/base.py", line 502, in runTouchApp
@@ -54,7 +54,8 @@
 [WARNING] stderr:   File "kivy/_event.pyx", line 1098, in kivy._event.EventObservers._dispatch (kivy/_event.c:12346)
 [WARNING] stderr:   File "/data/user/0/ru.iiec.pydroid2/files/arm-linux-androideabi/lib/python2.7/site-packages/kivy/lang/builder.py", line 64, in custom_callback
 [WARNING] stderr:     exec(__kvlang__.co_value, idmap)
-[WARNING] stderr:   File "<string>", line 104, in <module>
-[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 186, in login
-[WARNING] stderr:     else:
-[WARNING] stderr: AttributeError: 'Example' object has no attribute 'flogin'
+[WARNING] stderr:   File "<string>", line 93, in <module>
+[WARNING] stderr:   File "/storage/emulated/0/github/FDS/main.py", line 401, in remove
+[WARNING] stderr:     self.main_widget.ids.box.remove_widget(botao)
+[WARNING] stderr:   File "kivy/properties.pyx", line 839, in kivy.properties.ObservableDict.__getattr__ (kivy/properties.c:11967)
+[WARNING] stderr: AttributeError: 'super' object has no attribute '__getattr__'

@@ -42,7 +42,7 @@ NavigationLayout
         NavigationDrawerIconButton:
             icon: 'checkbox-blank-circle'
             text: "Inicio"
-            on_release: app.root.ids.scr_mngr.current = 'adicionar'
+            on_release: app.root.ids.scr_mngr.current = 'inicio'
         NavigationDrawerIconButton:
             icon: 'checkbox-blank-circle'
             text: "Conta"
@@ -70,72 +70,15 @@ NavigationLayout
 				id:conta
 				TelaLogin:
 			
-			Screen:
+			TelaInicio:
 				name:'inicio'
-				BoxLayout:
-					orientation:'vertical'
-					BoxLayout:
-						ScrollView:
-							BoxLayout:
-								orientation:'vertical'
-								id:box
-								size_hint_y:None
-								height:self.minimum_height
-					BoxLayout:
-						size_hint_y:.1
-						BoxLayout:
-						MDFloatingActionButton:
-							icon:'plus'
-							on_release:app.root.ids.scr_mngr.current='adicionar'
-						BoxLayout:
-							size_hint_x:.05
-					BoxLayout:
-						size_hint_y:.1
+			
 					
 					
 			
-			Screen:
+			TelaAdicionar:
 				name:'adicionar'
-				BoxLayout:
-					orientation:'vertical'
-					ScrollView:
-						BoxLayout:
-							orientation:'vertical'
-							size_hint_y:None
-							height:self.minimum_height
-							
-							BoxLayout:
-								orientation:'vertical'
-								size_hint_y:None
-								height:400
-								padding:80,50
-								spacing:40
-								canvas:
-									Color:
-										rgba:0.5,.5,0,1
-									Rectangle:
-										size:self.size
-										pos:self.pos
-								Screen:
-									MDTextField:
-										hint_text:'Nome'
-								
-								Screen:
-									MDTextField:
-										hint_text:'Descrição'
-										helper_text:'Este não é um campo obrigatorio'
-										helper_text_mode:'on_focus'
-										color_mode : 'custom'
-										line_color_focus:self.theme_cls.opposite_bg_normal
-								
-										
-								
-			
-			
-						
-					BoxLayout:
-						
-							
+				
 			
 			Screen:
 				name:'sobre'
@@ -165,7 +108,7 @@ NavigationLayout
 					size_hint_y:None
 					height:140
 					text:'X'
-					on_release:app.remove(root)
+					on_release:app.root.ids.scr_mngr.get_screen('inicio').removerWidget(root)
 <TelaLogin>:
 	orientation:'vertical'
 	BoxLayout:
@@ -270,13 +213,130 @@ NavigationLayout
 			
 	BoxLayout:
 		size_hint_y:.1
-		
+
+<TelaAdicionar>:
+	BoxLayout:
+		orientation:'vertical'
+		ScrollView:
+			BoxLayout:
+				size_hint_y:None
+				height:self.minimum_height
+				orientation:'vertical'
+				BoxLayout:
+					orientation:'vertical'
+					size_hint_y:None
+					height:400
+					padding:90
+					spacing:10
+					canvas:
+						Color:
+							rgba:.6,0.6,0,1
+						Rectangle:
+							size:self.size
+							pos:self.pos
+					Screen:
+						MDTextField:
+							hint_text:'Nome'
+							id:futnome
+					Screen:
+						MDTextField:
+							hint_text:'Descrição'
+							helper_text:'Campo não obrigatorio!'
+							helper_text_mode:'on_focus'
+				OneLineListItem:
+				Screen:
+					MDRaisedButton:
+						text:'Salvar'
+						pos_hint:{'center_x':.5,'center_y':.5}
+						on_release:root.salvar()
+					
 	
+<TelaInicio>:
+	id:telainicio
+	name:'inicio'
+	BoxLayout:
+		orientation:'vertical'
+		ScrollView:
+			BoxLayout:
+				orientation:'vertical'
+				id:box
+				size_hint_y:None
+				height:self.minimum_height
+		BoxLayout:
+			size_hint_y:.1
+			id:boxusuario
+		
+		BoxLayout:
+			size_hint_y:.05
+		
+<BotaoPlus>:
+	BoxLayout:
+	BoxLayout:
+	BoxLayout:
+		size_hint_x:.48
+		MDFloatingActionButton:
+			icon:'plus'
+			on_release:app.root.ids.scr_mngr.current='adicionar'
+			
 				
 """
 
+
+
+class BotaoPlus(BoxLayout):
+	pass
+
+
 conectado=None
 logado=''
+
+class TelaUsuario(Screen):
+	pass
+
+
+class TelaInicio(Screen):
+	dados=[]
+	def on_pre_enter(self):
+		self.carregar()
+		self.ids.box.clear_widgets()
+		global conectado,logado
+		
+		if conectado and logado == 'adm':
+			self.ids.boxusuario.clear_widgets()
+			self.ids.boxusuario.add_widget(BotaoPlus())
+		else:
+			self.ids.boxusuario.clear_widgets()
+		
+		for cada in self.dados:
+			self.ids.box.add_widget(Futebol(cada))
+	
+	def carregar(self,*args):
+		try:
+			with open('lista.txt','r') as file:
+				self.dados=file.readlines()
+		except:
+			pass
+	
+	def removerWidget(self,botao):
+		self.ids.box.remove_widget(botao)
+		self.dados.remove(botao.ids.btfut.text)
+		self.salvar()
+	def salvar(self,*args):
+		try:
+			with open('lista.txt','w') as file:
+				file.write(self.dados)
+		except:
+			pass
+
+class TelaAdicionar(Screen):
+	def salvar(self,*args):
+		futebol=self.ids.futnome.text
+		try:
+			with open('lista.txt','w') as file:
+				file.write('%s'%futebol)
+		except:
+			pass
+		
 
 class TelaClt(BoxLayout):
 	def logout(self,*args):
@@ -354,8 +414,9 @@ class Example(App):
 	
    
 class Futebol(BoxLayout):
-	def __init__(self,**kwargs):
+	def __init__(self,texto,**kwargs):
 		super(Futebol,self).__init__(**kwargs)
+		self.ids.btfut.text=texto
 		
 
 		
