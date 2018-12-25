@@ -71,10 +71,7 @@ NavigationLayout
 				TelaLogin:
 			
 			TelaInicio:
-				name:'inicio'
-			
-					
-					
+				name:'inicio'	
 			
 			TelaAdicionar:
 				name:'adicionar'
@@ -318,9 +315,14 @@ class TelaInicio(Screen):
 			pass
 	
 	def removerWidget(self,botao):
-		self.ids.box.remove_widget(botao)
-		self.dados.remove(botao.ids.btfut.text)
-		self.salvar()
+		global logado,conectado
+		if logado == 'adm':
+			self.ids.box.remove_widget(botao)
+			self.dados.remove(botao.ids.btfut.text)
+			self.salvar()
+		else:
+			toast('Atitude negada, baixo nivel de autoridade!')
+		
 	def salvar(self,*args):
 		try:
 			with open('lista.json','w') as file:
