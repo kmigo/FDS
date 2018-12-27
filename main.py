@@ -1,5 +1,6 @@
 #coding=utf-8
-import sys,json
+
+import sys,json,os
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -9,12 +10,14 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen,ScreenManager
 from kivy.properties import ObjectProperty
+from kivy.uix.image import Image
 
 from kivymd.navigationdrawer import NavigationDrawerIconButton
 from kivymd.theming import ThemeManager
 from kivymd.toast import toast
 from kivymd.navigationdrawer import NavigationLayout
 from kivymd.label import MDLabel 
+from kivymd.list import ILeftBody, ILeftBodyTouch, IRightBodyTouch, BaseListItem
 
 main_kv = """
 #coding:utf-8
@@ -30,6 +33,8 @@ main_kv = """
 #:import OneLineListItem kivymd.list.OneLineListItem
 #:import TwoLineListItem kivymd.list.TwoLineListItem
 #:import ThreeLineListItem kivymd.list.ThreeLineListItem
+#:import MDList kivymd.list.MDList
+#:import OneLineAvatarIconListItem kivymd.list.OneLineAvatarIconListItem
 
 
 
@@ -75,6 +80,11 @@ NavigationLayout
 			
 			TelaAdicionar:
 				name:'adicionar'
+			
+			Screen:
+				id:gerenciar
+				name:'gerenciar'
+				GerenciadorFut:
 				
 			
 			Screen:
@@ -82,8 +92,7 @@ NavigationLayout
 				BoxLayout:
 					Button:
 					Button:
-					Button:
-
+									
 <Futebol>:
 	size_hint_y:None
 	height:250
@@ -98,6 +107,7 @@ NavigationLayout
 					size_hint:None,None
 					size:dp(300),140
 					text:'Futebol Fim de Semana'
+					on_release:app.root.ids.scr_mngr.get_screen('inicio').carregaFut(root)
 			Screen:
 				MDRaisedButton:
 					id:btdel
@@ -121,10 +131,12 @@ NavigationLayout
 		MDTextField:
 			hint_text:'Login'
 			id:txtlogin
+			
 		MDTextField:
 			hint_text:'Senha'
 			password : True
 			id:txtsenha
+			
 	BoxLayout:
 		Screen:
 			MDRaisedButton:
@@ -274,18 +286,107 @@ NavigationLayout
 		MDFloatingActionButton:
 			icon:'plus'
 			on_release:app.root.ids.scr_mngr.current='adicionar'
+
+<GerenciadorFut>:
+	BoxLayout:
+		orientation:'vertical'
+		BoxLayout:
+			ScrollView:
+				BoxLayout:
+					size_hint_y:None
+					height:self.minimum_height
+					orientation:'vertical'
+					padding:100
+					spacing:40
+					MDCard:
+						size_hint_y:None
+						height:263
+						
+						ThreeLineAvatarListItem:
+							text:'Jogadores'
+							font_style:'Headline'
+							secondary_text:'Adicionar, editar e visualizar a lista de jogadores'
+							
+							AvatarSampleWidget:
+								source:'futi.png'
+							
+					
+					MDCard:
+						size_hint_y:None
+						height:263
+						
+						ThreeLineAvatarListItem:
+							text:'Estatisticas'
+							font_style:'Headline'
+							secondary_text:'Artilhara, faltas, gols e etc...'
+							AvatarSampleWidget:
+								source:'estat.png'
+					
+					MDCard:
+						size_hint_y:None
+						height:263
+						
+						ThreeLineAvatarListItem:
+							text:'Partidas'
+							font_style:'Headline'
+							secondary_text:'Executar e gerencia a partida'
+							AvatarSampleWidget:
+								source:'placar.png'
+					
+					MDCard:
+						size_hint_y:None
+						height:263
+						
+						ThreeLineAvatarListItem:
+							text:'Ranking'
+							font_style:'Headline'
+							secondary_text:'Pontos dos jogadores'
+							
+							AvatarSampleWidget:
+								source:'rank.png'
+					MDCard:
+						size_hint_y:None
+						height:263
+						
+						ThreeLineAvatarListItem:
+							text:'Configuraçoes'
+							font_style:'Headline'
+							secondary_text:'Configurações ds partida'
+							AvatarSampleWidget:
+								source:'conf.png'
+					
+					MDCard:
+						size_hint_y:None
+						height:263
+						
+						ThreeLineAvatarListItem:
+							text:'Informação'
+							font_style:'Headline'
+							secondary_text:'Dados sobre os jogadores'
+							AvatarSampleWidget:
+								source:'info.png'
+									
+						
+						
+						
 			
 				
 """
+conectado = None
+logado = ''
+futebol= ''
 
+class AvatarSampleWidget(ILeftBody, Image):
+    pass
+
+
+class GerenciadorFut(BoxLayout):
+	pass
 
 
 class BotaoPlus(BoxLayout):
 	pass
 
-
-conectado=None
-logado=''
 
 class TelaUsuario(Screen):
 	pass
@@ -314,6 +415,12 @@ class TelaInicio(Screen):
 		except:
 			pass
 	
+	def carregaFut(self,botao):
+		global futebol
+		futebol = botao.ids.btfut.text
+		App.get_running_app().main_widget.ids.scr_mngr.current='gerenciar'
+		
+	
 	def removerWidget(self,botao):
 		global logado,conectado
 		if logado == 'adm':
@@ -321,7 +428,7 @@ class TelaInicio(Screen):
 			self.dados.remove(botao.ids.btfut.text)
 			self.salvar()
 		else:
-			toast('Atitude negada, baixo nivel de autoridade!')
+			toast('Acesso restrito, baixo nivel de autoridade!')
 		
 	def salvar(self,*args):
 		try:
@@ -427,21 +534,13 @@ class Example(App):
     
     def remove(self,botao):
 		self.main_widget.ids.box.remove_widget(botao)
-	
-	
+		
    
 class Futebol(BoxLayout):
 	def __init__(self,texto,**kwargs):
 		super(Futebol,self).__init__(**kwargs)
 		self.ids.btfut.text=texto
 		
-
-		
-		
-		
-	
-
-
 
 
 Example().run()
