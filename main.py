@@ -11,6 +11,10 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen,ScreenManager
 from kivy.properties import ObjectProperty
 from kivy.uix.image import Image
+from kivy.uix.label import Label
+from kivy.core.window import Window
+
+from Banco import Banco
 
 from kivymd.navigationdrawer import NavigationDrawerIconButton
 from kivymd.theming import ThemeManager
@@ -81,10 +85,12 @@ NavigationLayout
 			TelaAdicionar:
 				name:'adicionar'
 			
-			Screen:
-				id:gerenciar
+			GerenciadorFutTela:
+				#id:gerenciar
 				name:'gerenciar'
-				GerenciadorFut:
+				BoxLayout:
+					id:gerenciar
+				#GerenciadorFut:
 				
 			
 			Screen:
@@ -308,7 +314,7 @@ NavigationLayout
 							secondary_text:'Adicionar, editar e visualizar a lista de jogadores'
 							
 							AvatarSampleWidget:
-								source:'futi.png'
+								source:'imagens/futi.png'
 							
 					
 					MDCard:
@@ -320,7 +326,7 @@ NavigationLayout
 							font_style:'Headline'
 							secondary_text:'Artilhara, faltas, gols e etc...'
 							AvatarSampleWidget:
-								source:'estat.png'
+								source:'imagens/estat.png'
 					
 					MDCard:
 						size_hint_y:None
@@ -331,7 +337,7 @@ NavigationLayout
 							font_style:'Headline'
 							secondary_text:'Executar e gerencia a partida'
 							AvatarSampleWidget:
-								source:'placar.png'
+								source:'imagens/placar.png'
 					
 					MDCard:
 						size_hint_y:None
@@ -343,7 +349,7 @@ NavigationLayout
 							secondary_text:'Pontos dos jogadores'
 							
 							AvatarSampleWidget:
-								source:'rank.png'
+								source:'imagens/rank.png'
 					MDCard:
 						size_hint_y:None
 						height:263
@@ -353,7 +359,7 @@ NavigationLayout
 							font_style:'Headline'
 							secondary_text:'Configurações ds partida'
 							AvatarSampleWidget:
-								source:'conf.png'
+								source:'imagens/conf.png'
 					
 					MDCard:
 						size_hint_y:None
@@ -364,11 +370,12 @@ NavigationLayout
 							font_style:'Headline'
 							secondary_text:'Dados sobre os jogadores'
 							AvatarSampleWidget:
-								source:'info.png'
+								source:'imagens/info.png'
 									
 						
 						
-						
+<Jogadores>:
+	orientation:'vertical'
 			
 				
 """
@@ -376,12 +383,30 @@ conectado = None
 logado = ''
 futebol= ''
 
+class Jogadores(BoxLayout):
+	pass
+
+
 class AvatarSampleWidget(ILeftBody, Image):
     pass
 
-
 class GerenciadorFut(BoxLayout):
 	pass
+
+
+class GerenciadorFutTela(Screen):
+	def on_pre_enter(self):
+		Window.bind(on_keyboard=self.voltar)
+		App.get_running_app().main_widget.ids.gerenciar.clear_widgets()
+		App.get_running_app().main_widget.ids.gerenciar.add_widget(GerenciadorFut())
+	def voltar(self,window,key,*args):
+		if key == 27:
+			
+			App.get_running_app().main_widget.ids.scr_mngr.current='inicio'
+			return True
+	
+	def on_pre_leave(self):
+		Window.unbind(on_keyboard=self.voltar)
 
 
 class BotaoPlus(BoxLayout):
@@ -392,33 +417,56 @@ class TelaUsuario(Screen):
 	pass
 
 
-class TelaInicio(Screen):
+class TelaInicio(Screen,Banco):
 	dados=[]
+	
 	def on_pre_enter(self):
-		self.carregar()
 		self.ids.box.clear_widgets()
 		global conectado,logado
-		
+
+#         VERIFICAÇAO DE USUARIO
 		if conectado and logado == 'adm':
 			self.ids.boxusuario.clear_widgets()
 			self.ids.boxusuario.add_widget(BotaoPlus())
 		else:
 			self.ids.boxusuario.clear_widgets()
 		
-		for cada in self.dados:
-			self.ids.box.add_widget(Futebol(cada))
+#"""     CRIANDO OS BOTOES DE JOGOS NA TELA      """
+		self.update()
+
+#'''   VINCULANDO O BOTAO VOLTAR DO ANDROID     '''
+		Window.bind(on_keyboard=self.voltar)
 	
-	def carregar(self,*args):
-		try:
-			with open('lista.json','r') as file:
-				self.dados=json.load(file)
-		except:
-			pass
+	def voltar(self,window,key,*args):
+		if key == 27:
+			App.get_running_app().main_widget.ids.scr_mngr.current='conta'
 	
+			return True
+	
+	def on_pre_leave(self):
+#	'''  DESVINCULANDO O BOTAO VOLTAR PARA SAIR DO APP '''
+		Window.unbind(on_keyboard=self.voltar)
+		self.dados=[]
+		
 	def carregaFut(self,botao):
 		global futebol
 		futebol = botao.ids.btfut.text
+	
 		App.get_running_app().main_widget.ids.scr_mngr.current='gerenciar'
+
+	def update(self):
+		try:
+			for cada in self.showTable():
+				if cada not in self.dados:
+					self.dados.append(cada)
+					self.ids.box.add_widget(Futebol(cada))
+		except:
+			self.ids.box.add_widget(BoxLayout(
+			size_hint_y=None,height=200))
+			self.ids.box.add_widget(Label(
+			text='falha ao se conectar no banco de dados',
+			color=(0,0,0,1)))
+		
 		
 	
 	def removerWidget(self,botao):
@@ -471,7 +519,7 @@ class TelaClt(BoxLayout):
 		App.get_running_app().main_widget.ids.conta.add_widget(TelaLogin())
 
 
-class TelaAdm(BoxLayout):
+class TelaAdm(BoxLayout,Banco):
 	def logout(self,*args):
 		global conectado,logado
 		conectado=None
