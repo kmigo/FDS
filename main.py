@@ -473,8 +473,13 @@ class TelaInicio(Screen,Banco):
 		global logado,conectado
 		if logado == 'adm':
 			self.ids.box.remove_widget(botao)
-			self.dados.remove(botao.ids.btfut.text)
-			self.salvar()
+			#self.dados.remove(botao.ids.btfut.text)
+			#self.salvar()
+			futebol=botao.ids.btfut.text
+			try:
+				self.dropTable(futebol)
+			except:
+				self.dropTable('`%s`'%futebol)
 		else:
 			toast('Acesso restrito, baixo nivel de autoridade!')
 		
@@ -485,10 +490,20 @@ class TelaInicio(Screen,Banco):
 		except:
 			pass
 
-class TelaAdicionar(Screen):
+class TelaAdicionar(Screen,Banco):
 	dados=[]
 	def on_pre_enter(self):
 		self.carregar()
+		Window.bind(on_keyboard=self.voltar)
+	
+	def voltar(self,window,key,*args):
+		if key == 27:
+			App.get_running_app().main_widget.ids.scr_mngr.current='inicio'
+			return True
+	
+	def on_pre_leave(self):
+		Window.unbind(on_keyboard=self.voltar)
+	
 	def carregar(self,*args):
 		try:
 			with open('lista.json','r') as file:
@@ -499,7 +514,8 @@ class TelaAdicionar(Screen):
 	def salvar(self,*args):
 		futebol=self.ids.futnome.text
 		self.dados.append(futebol)
-		self.salvardados()
+		#self.salvardados()
+		self.createTable(futebol)
 		
 	def salvardados(self,*args):
 	
